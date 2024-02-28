@@ -1,7 +1,6 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import Rating from "../Rating/Rating";
-import { FaPlus } from "react-icons/fa";
 import styles from "./ProductCard.module.css";
 
 const ProductCard = ({ productItem }) => {
@@ -11,14 +10,15 @@ const ProductCard = ({ productItem }) => {
         variant="top"
         src={productItem.images[0]}
         alt={productItem.name}
-        className={`${styles.productImage}`}
+        className={styles.productImage}
       />
-      <Card.Body>
-        <Card.Title className="text-center">{productItem.name}</Card.Title>
-        <div className="d-flex justify-content-between mt-3">
-          <span className="fw-bold">{productItem.price}</span>
-          <Rating value={productItem.rating} />
+      <Card.Body className="text-center">
+        <Card.Title className="fw-bold">{productItem.name}</Card.Title>
+        <div>
+          <Rating rating={productItem.averageRating} /> (
+          {productItem.averageRating})
         </div>
+        <span className="d-block mt-3">${productItem.price}</span>
       </Card.Body>
     </Card>
   );
