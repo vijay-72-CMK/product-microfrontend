@@ -11,6 +11,7 @@ const ProductCard = ({ productItem }) => {
         variant="top"
         src={productItem.images[0]}
         alt={productItem.name}
+        className={`${styles.productImage}`}
       />
       <Card.Body>
         <Card.Title className="text-center">{productItem.name}</Card.Title>
