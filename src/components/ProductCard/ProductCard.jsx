@@ -2,16 +2,20 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import Rating from "../Rating/Rating";
 import styles from "./ProductCard.module.css";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ productItem }) => {
   return (
     <Card className={`${styles.product} mb-5 mx-auto border-0`}>
-      <Card.Img
-        variant="top"
-        src={productItem.images[0]}
-        alt={productItem.name}
-        className={styles.productImage}
-      />
+      <Link to={`/products/${productItem.id}`}>
+        <Card.Img
+          variant="top"
+          src={productItem.images[0]}
+          alt={productItem.name}
+          className={styles.productImage}
+        />
+      </Link>
+
       <Card.Body className="text-center">
         <Card.Title className="fw-bold">{productItem.name}</Card.Title>
         <div>
