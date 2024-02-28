@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Product from "./pages/ProductPage";
+import Product from "./pages/Product/ProductPage";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
