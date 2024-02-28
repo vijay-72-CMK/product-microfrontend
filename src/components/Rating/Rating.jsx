@@ -9,7 +9,7 @@ const Rating = ({ rating }) => {
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<FaStar key={i} className={`star ${styles.star}`} />);
+      stars.push(<FaStar key={i} className={`star ${styles.star} me-1`} />);
     }
     if (hasHalfStar) {
       stars.push(
@@ -19,7 +19,11 @@ const Rating = ({ rating }) => {
     return stars;
   };
 
-  return <div className={`${styles["rating-container"]}`}>{renderStars()}</div>;
+  return (
+    <div className={`${styles["rating-container"]} d-inline-block`}>
+      {renderStars()}
+    </div>
+  );
 };
 
 export default Rating;

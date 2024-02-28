@@ -1,30 +1,35 @@
 import React from "react";
-import { Col, Image } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import Rating from "../Rating/Rating";
 import { FaPlus } from "react-icons/fa";
 import styles from "./ProductCard.module.css";
 
 const ProductCard = ({ productItem }) => {
   return (
-    <Col md={3} sm={5} xs={10} className={`${styles.product} mtop`}>
-      <Image
-        loading="lazy"
-        src={productItem?.images && productItem?.images[0]}
-        alt=""
-      />
+    <Card className={`${styles.product} mb-4`}>
+      <div className={styles.productImg}>
+        <Card.Img
+          loading="lazy"
+          variant="top"
+          src={productItem?.images && productItem?.images[0]}
+          alt={productItem.name}
+        />
+      </div>
 
-      <div className={styles["product-details"]}>
-        <h3 className={styles["product-title"]}>{productItem.name}</h3>
+      <Card.Body className={`${styles.productDetails} p-3`}>
+        <Card.Title className={`${styles.productTitle} text-primary`}>
+          {productItem.name}
+        </Card.Title>
         <Rating rating={productItem.averageRating} />
 
-        <div className={styles["price"]}>
+        <div className="d-flex justify-content-between align-items-start mt-3">
           <h4>${productItem.price}</h4>
-          <button aria-label="Add" type="submit" className={styles["add"]}>
+          <Button variant="light" className={styles.add}>
             <FaPlus />
-          </button>
+          </Button>
         </div>
-      </div>
-    </Col>
+      </Card.Body>
+    </Card>
   );
 };
 
