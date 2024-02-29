@@ -1,0 +1,46 @@
+.productDetailsContainer {
+  margin: 150px auto;
+}
+.productDetailsContainer .row {
+  margin: 0 !important;
+}
+
+.productTitle {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.productDescription {
+  margin-bottom: 20px;
+}
+
+.price,
+.rating {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.attributes {
+  list-style: disc;
+  margin-top: 20px;
+  margin-left: 20px;
+  color: black;
+}
+
+.attribute {
+  margin-bottom: 5px;
+}
+
+.attributeKey {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .productTitle {
+    margin-top: 25px;
+  }
+}
+
+.productImage {
+  transition: opacity 0.3s ease-in-out;
+}
