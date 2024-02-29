@@ -7,6 +7,7 @@ const Filters = ({ productFilters, setProductFilters }) => {
   const [categories, setCategories] = useState([]);
 
   const priceOptions = [
+    { value: null, label: "All Prices" },
     { value: "0-50", label: "$0 - $50" },
     { value: "50-100", label: "$50 - $100" },
     { value: "100-200", label: "$100 - $200" },
@@ -33,7 +34,10 @@ const Filters = ({ productFilters, setProductFilters }) => {
   };
 
   const handlePriceChange = (option) => {
-    setProductFilters({ ...productFilters, priceRange: option.value });
+    setProductFilters({
+      ...productFilters,
+      priceRange: option ? option.value : null,
+    });
   };
 
   useEffect(() => {
@@ -65,7 +69,7 @@ const Filters = ({ productFilters, setProductFilters }) => {
                 : null
             }
             onChange={handlePriceChange}
-            placeholder="Filter by Price Range"
+            placeholder="Price"
           />
         </Col>
       </Row>
