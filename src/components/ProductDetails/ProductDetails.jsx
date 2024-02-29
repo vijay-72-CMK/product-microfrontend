@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./ProductDetails.module.css";
+import { FaDollarSign } from "react-icons/fa";
 import { Container, Row, Col, Image } from "react-bootstrap";
 
 const ProductDetails = () => {
@@ -51,7 +52,7 @@ const ProductDetails = () => {
             />
             <Row className="mt-3 no-gutters">
               {productData.images.map((image, index) => (
-                <Col key={index} xs={3}>
+                <Col key={index} xs={2}>
                   <Image
                     className={`${styles.thumbnail} img-fluid`}
                     src={image}
@@ -62,13 +63,19 @@ const ProductDetails = () => {
               ))}
             </Row>
           </Col>
-          <Col md={5}>
+          <Col md={6}>
             <h2 className={styles.productTitle}>{productData.name}</h2>
             <p className={`${styles.productDescription} text-wrap`}>
               {productData.description}
             </p>
-            <div className={styles.price}>{productData.price}</div>
-            <div className={styles.rating}>{productData.rating}</div>
+            <div className={`${styles.productWrapper} mb-2`}>
+              <span className={styles.priceLabel}>Price:</span>
+              <span className={styles.boldBigPrice}>
+                <FaDollarSign className="dollar-icon" />
+                {productData.price}
+              </span>
+            </div>
+            <h4 className="fw-bold">Specs</h4>
             <ul className={styles.attributes}>
               {Object.keys(productData.attributes).map((key, index) => (
                 <li key={index} className={styles.attribute}>

@@ -14,22 +14,20 @@
   margin-bottom: 20px;
 }
 
-.price,
-.rating {
+.price {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
 
 .attributes {
   list-style: disc;
-  margin-top: 20px;
-  margin-left: 20px;
-  color: black;
+  /* margin-top: 20px;
+  margin-left: 20px; */
 }
 
-.attribute {
+/* .attribute {
   margin-bottom: 5px;
-}
+} */
 
 .attributeKey {
   font-weight: bold;
@@ -41,6 +39,26 @@
   }
 }
 
-.productImage {
-  transition: opacity 0.3s ease-in-out;
+.priceLabel,
+.boldBigPrice {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #1371ac;
+}
+
+.dollar-icon {
+  margin-right: 5px;
+}
+
+.priceLabel,
+.boldBigPrice {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #1371ac;
+  align-items: center; /* Center the icon vertically */
+}
+
+.dollar-icon {
+  margin-right: 10px; /* Increase the margin for better spacing */
+  font-size: 1.5rem; /* Adjust the icon size */
 }
