@@ -5,13 +5,12 @@ import ProductsList from "./pages/Product/ProductPage";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import BRouter from "./components/BRouter";
 
-const App = () => (
+const App = () => <BRouter />;
+ReactDOM.render(
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<ProductsList />} />
-      <Route path="/products/:productId" element={<ProductDetails />} />
-    </Routes>
-  </BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("app")
 );
-ReactDOM.render(<App />, document.getElementById("app"));

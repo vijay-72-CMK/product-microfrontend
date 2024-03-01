@@ -44,7 +44,7 @@ module.exports = (_, argv) => ({
       name: "product_frontend",
       filename: "remoteEntry.js",
       remotes: {},
-      exposes: {},
+      exposes: { "./Brouter": "./src/components/BRouter.jsx" },
       shared: {
         ...deps,
         react: {

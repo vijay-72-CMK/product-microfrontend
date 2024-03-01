@@ -1,5 +1,6 @@
 .productDetailsContainer {
-  margin: 150px auto;
+  margin: 100px auto;
+  min-height: 500px;
 }
 .productDetailsContainer .row {
   margin: 0 !important;
