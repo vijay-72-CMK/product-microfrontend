@@ -10,6 +10,7 @@ const ProductDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
   const [mainImage, setMainImage] = useState(null);
+  const [selectedThumbnail, setSelectedThumbnail] = useState(0);
 
   const fetchProductData = async () => {
     setIsLoading(true);
@@ -34,6 +35,8 @@ const ProductDetails = () => {
   }, [productId]);
 
   const handleMainImageChange = (newImage) => {
+    const newIndex = productData.images.indexOf(newImage);
+    setSelectedThumbnail(newIndex);
     console.log("New Image Clicked:", newImage);
     setMainImage(newImage);
   };
@@ -54,7 +57,9 @@ const ProductDetails = () => {
               {productData.images.map((image, index) => (
                 <Col key={index} xs={2}>
                   <Image
-                    className={`${styles.thumbnail} img-fluid`}
+                    className={`${styles.thumbnail} img-fluid ${
+                      index === selectedThumbnail ? styles.selected : ""
+                    }`}
                     src={image}
                     alt={`Product Thumbnail ${index}`}
                     onClick={() => handleMainImageChange(image)}

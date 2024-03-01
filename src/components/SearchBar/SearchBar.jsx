@@ -1,15 +1,20 @@
 import React from "react";
 import "./SearchBar.css";
 import { FaSearch, FaTimes } from "react-icons/fa";
+import debounce from "lodash/debounce";
 
 function SearchBar({ placeholder, filters, setFilters }) {
   const handleInputChange = (event) => {
     const newKeyword = event.target.value;
+    debouncedHandleInputChange(newKeyword);
+  };
+
+  const debouncedHandleInputChange = debounce((newKeyword) => {
     setFilters({
       ...filters,
       keyword: newKeyword,
     });
-  };
+  }, 500);
 
   const clearInput = () => {
     setFilters({
@@ -18,25 +23,6 @@ function SearchBar({ placeholder, filters, setFilters }) {
     });
   };
 
-  // return (
-  //   <div className="search">
-  //     <div className="searchInputs">
-  //       <input
-  //         type="text"
-  //         placeholder={placeholder}
-  //         value={filters.keyword || ""}
-  //         onChange={handleInputChange}
-  //       />
-  //       <div className="searchIcon">
-  //         {filters.keyword ? (
-  //           <FaTimes id="clearBtn" onClick={clearInput} />
-  //         ) : (
-  //           <FaSearch />
-  //         )}
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
   return (
     <div className="search container">
       <div className="input-group mb-3">
@@ -44,7 +30,7 @@ function SearchBar({ placeholder, filters, setFilters }) {
           type="text"
           className="form-control"
           placeholder={placeholder}
-          value={filters.keyword || ""}
+          // value={filters.keyword || ""}
           onChange={handleInputChange}
         />
         <span className="input-group-text">

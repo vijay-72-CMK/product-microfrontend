@@ -56,10 +56,26 @@
   font-weight: bold;
   font-size: 1.5rem;
   color: #1371ac;
-  align-items: center; /* Center the icon vertically */
+  align-items: center;
 }
 
 .dollar-icon {
-  margin-right: 10px; /* Increase the margin for better spacing */
-  font-size: 1.5rem; /* Adjust the icon size */
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.thumbnail {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnail:hover {
+  opacity: 1;
+}
+
+.selected {
+  border: 2px solid #1371ac;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transform: scale(1.1);
 }
