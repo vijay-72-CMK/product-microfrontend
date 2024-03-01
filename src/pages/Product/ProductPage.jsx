@@ -50,7 +50,7 @@ const Product = () => {
   }, [productsFilter]);
 
   return (
-    <Container className={`${styles.products}`}>
+    <Container className={`${styles.products}`} style={{ minHeight: "800px" }}>
       <Filters
         productFilters={productsFilter}
         setProductFilters={setProductsFilter}
