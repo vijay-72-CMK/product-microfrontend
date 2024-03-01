@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Filters = ({ productFilters, setProductFilters }) => {
   const [categories, setCategories] = useState([]);
@@ -40,12 +41,28 @@ const Filters = ({ productFilters, setProductFilters }) => {
     });
   };
 
+  const handleKeywordChange = (keyword) => {
+    setProductFilters({
+      ...productFilters,
+      keyword: keyword,
+    });
+  };
+
   useEffect(() => {
     fetchCategories();
   }, []);
 
   return (
     <Container className="filter-container mb-5">
+      <Row>
+        <Col xs={3}>
+          <SearchBar
+            placeholder="Search Products..."
+            filters={productFilters}
+            setFilters={setProductFilters}
+          />
+        </Col>
+      </Row>
       <Row>
         <Col xs={12} sm={6} md={4} lg={3}>
           <Select

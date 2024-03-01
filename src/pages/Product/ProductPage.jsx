@@ -11,6 +11,7 @@ const Product = () => {
     categoryIds: [],
     brand: "",
     priceRange: null,
+    keyword: "",
   });
 
   const fetchProducts = async () => {
@@ -33,6 +34,7 @@ const Product = () => {
             category: categoryIdString,
             minPrice,
             maxPrice,
+            keyword: productsFilter.keyword,
           },
         }
       );

@@ -1,0 +1,16 @@
+.search input:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
+.input-group-text {
+  background-color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 575px) {
+  .input-group-text {
+    flex-shrink: 0;
+    width: 40px;
+  }
+}
