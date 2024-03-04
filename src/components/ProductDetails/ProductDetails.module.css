@@ -79,3 +79,44 @@
   opacity: 1;
   transform: scale(1.1);
 }
+
+.quantitySelector {
+  margin-bottom: 15px;
+}
+
+.quantitySelector label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.quantitySelector input[type="number"] {
+  width: 80px;
+  padding: 5px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.quantitySelector button {
+  border: none;
+  background-color: #e9ecef;
+  padding: 5px 10px;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.quantitySelector button:hover {
+  background-color: #dee2e6;
+}
+
+.addToCartButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.addToCartButton:hover {
+  background-color: #0056b3;
+}

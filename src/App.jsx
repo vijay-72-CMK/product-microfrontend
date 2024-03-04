@@ -6,6 +6,8 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import BRouter from "./components/BRouter";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => <BRouter />;
 ReactDOM.render(

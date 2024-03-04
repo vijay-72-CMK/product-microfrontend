@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductsList from "../pages/Product/ProductPage";
 import ProductDetails from "./ProductDetails/ProductDetails";
+import { ToastContainer } from "react-toastify";
 
 import React from "react";
 

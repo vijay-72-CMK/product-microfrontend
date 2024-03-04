@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./ProductDetails.module.css";
 import { FaDollarSign } from "react-icons/fa";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -11,6 +13,37 @@ const ProductDetails = () => {
   const [productData, setProductData] = useState(null);
   const [mainImage, setMainImage] = useState(null);
   const [selectedThumbnail, setSelectedThumbnail] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (event) => {
+    setQuantity(parseInt(event.target.value, 10) || 1);
+  };
+
+  const handleQuantityIncrement = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleQuantityDecrement = () => {
+    setQuantity(Math.max(quantity - 1, 1));
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8082/api/cart/modify-cart",
+        {
+          productId,
+          quantity,
+        },
+        { withCredentials: true }
+      );
+      console.log("Cart updated", response);
+      toast.success(`Added ${quantity} item(s) to the cart!`);
+    } catch (error) {
+      console.error("Error adding to cart", error);
+      toast.error("Error adding item to cart!");
+    }
+  };
 
   const fetchProductData = async () => {
     setIsLoading(true);
@@ -91,9 +124,28 @@ const ProductDetails = () => {
                 </li>
               ))}
             </ul>
+            <div className={styles.quantitySelector}>
+              <label htmlFor="quantity">Quantity:</label>
+              <button onClick={handleQuantityDecrement}>-</button>
+              <input
+                type="number"
+                id="quantity"
+                min="1"
+                value={quantity}
+                onChange={handleQuantityChange}
+              />
+              <button onClick={handleQuantityIncrement}>+</button>
+            </div>
+            <Button
+              className={styles.addToCartButton}
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </Button>
           </Col>
         </Row>
       )}
+      <ToastContainer />
     </Container>
   );
 };
