@@ -39,11 +39,11 @@ const ProductDetails = () => {
       );
       console.log("Cart updated", response);
       window.dispatchEvent(
-        new CustomEvent("cart-item-added", {
+        new CustomEvent("cart-change", {
           detail: { productId, quantity },
         })
       );
-      console.log("Event dispatched: cart-item-added");
+      console.log("Event dispatched: cart-change from PDP");
       toast.success(`Added ${quantity} item(s) to the cart!`);
     } catch (error) {
       console.error("Error adding to cart", error);
