@@ -9,9 +9,11 @@ const Product = () => {
   const [products, setProducts] = useState([]);
   const [productsFilter, setProductsFilter] = useState({
     categoryIds: [],
-    brand: "",
+    brands: [],
     priceRange: null,
     keyword: "",
+    boardSizes: [],
+    selectedSort: "",
   });
   const [currentPage, setCurrentPage] = useState(0);
   const [paginationInfo, setPaginationInfo] = useState({});
@@ -22,15 +24,21 @@ const Product = () => {
 
   const fetchProducts = async (page = 0) => {
     const categoryIdString = productsFilter.categoryIds.join(",");
+    const boardSizeString = productsFilter.boardSizes.join(",");
+    const brandsString = productsFilter.brands.join(",");
 
     let minPrice;
     let maxPrice;
+    let sortBy;
+    let sortDirection;
 
     if (productsFilter.priceRange === "300-plus") {
       minPrice = 300;
     } else if (productsFilter.priceRange) {
       [minPrice, maxPrice] = productsFilter.priceRange.split("-");
     }
+    [sortBy, sortDirection] = productsFilter.selectedSort.split("_");
+    console.log(sortBy, sortDirection);
 
     try {
       const response = await axios.get(
@@ -38,10 +46,14 @@ const Product = () => {
         {
           params: {
             category: categoryIdString,
+            boardSize: boardSizeString,
+            brand: brandsString,
             minPrice,
             maxPrice,
             keyword: productsFilter.keyword,
             page,
+            sortBy,
+            sortDirection,
             size: 8,
           },
         }
@@ -66,7 +78,9 @@ const Product = () => {
   }, [productsFilter, currentPage]);
 
   return (
-    <Container className={`${styles.products}`} style={{ minHeight: "800px" }}>
+    <Container className={`${styles.products}`}>
+      <h2 className={styles.catalogHeading}>Custom Keys for Ultimate Clicks</h2>
+
       <Filters
         productFilters={productsFilter}
         setProductFilters={setProductsFilter}

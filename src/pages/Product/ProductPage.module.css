@@ -1,3 +1,12 @@
 .products {
-  margin-top: 100px;
+  margin-top: 50px;
+  min-height: "1000px";
+}
+
+.catalogHeading {
+  font-family: "Montserrat", sans-serif;
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
 }

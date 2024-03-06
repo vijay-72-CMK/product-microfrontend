@@ -16,13 +16,16 @@ const ProductCard = ({ productItem }) => {
         />
       </Link>
 
-      <Card.Body className="text-center">
+      <Card.Body className="text-start">
         <Card.Title className="fw-bold">{productItem.name}</Card.Title>
-        <div>
-          <Rating rating={productItem.averageRating} /> (
-          {productItem.averageRating})
+        <div className="d-flex align-items-center">
+          <Rating rating={productItem.averageRating} />
+          <span className="ms-auto">({productItem.averageRating})</span>
         </div>
-        <span className="d-block mt-3">${productItem.price}</span>
+        <div className="d-flex align-items-center mt-3">
+          <span className="fw-bold">${productItem.price}</span>
+          <button className="ms-auto btn btn-primary">Add to Cart</button>
+        </div>
       </Card.Body>
     </Card>
   );

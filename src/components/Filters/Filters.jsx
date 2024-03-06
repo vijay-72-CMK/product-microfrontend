@@ -16,6 +16,34 @@ const Filters = ({ productFilters, setProductFilters }) => {
     { value: "300-plus", label: "$300+" },
   ];
 
+  const keyboardSizes = [
+    { label: "40%", value: 40 },
+    { label: "60%", value: 60 },
+    { label: "65%", value: 65 },
+    { label: "75%", value: 75 },
+    { label: "TKL (Tenkeyless)", value: 80 },
+    { label: "96%", value: 96 },
+    { label: "Full-size (100%)", value: 100 },
+  ];
+
+  const availableBrands = [
+    { label: "KBDFans", value: "KBDfans" },
+    { label: "Keychron", value: "Keychron" },
+    { label: "Glorious", value: "Glorious" },
+    { label: "Ducky", value: "Ducky" },
+    { label: "Varmilo", value: "Varmilo" },
+    { label: "Leopold", value: "Leopold" },
+  ];
+
+  const sortOptions = [
+    { label: "Price (Low to High)", value: "price_asc" },
+    { label: "Price (High to Low)", value: "price_desc" },
+    { label: "Title (A - Z)", value: "name_asc" },
+    { label: "Title (Z - A)", value: "name_desc" },
+    { label: "Date (Oldest - Newest)", value: "createdAt_asc" },
+    { label: "Date (Newest - Oldest)", value: "createdAt_desc" },
+  ];
+
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
@@ -41,13 +69,23 @@ const Filters = ({ productFilters, setProductFilters }) => {
     });
   };
 
-  const handleKeywordChange = (keyword) => {
-    setProductFilters({
-      ...productFilters,
-      keyword: keyword,
-    });
+  const handleKeyboardSizeChange = (selectedSizes) => {
+    const allSelectedSizes = selectedSizes
+      ? selectedSizes.map((selectedSize) => selectedSize.value)
+      : [];
+    setProductFilters({ ...productFilters, boardSizes: allSelectedSizes });
   };
 
+  const handleBrandChange = (selectedBrands) => {
+    const allSelectedBrands = selectedBrands
+      ? selectedBrands.map((selectedBrands) => selectedBrands.value)
+      : [];
+    setProductFilters({ ...productFilters, brands: allSelectedBrands });
+  };
+
+  const handleSortChange = (sortOption) => {
+    setProductFilters({ ...productFilters, selectedSort: sortOption.value });
+  };
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -55,11 +93,20 @@ const Filters = ({ productFilters, setProductFilters }) => {
   return (
     <Container className="filter-container mb-5">
       <Row>
-        <Col xs={3}>
+        <Col xs={6}>
           <SearchBar
             placeholder="Search Products..."
             filters={productFilters}
             setFilters={setProductFilters}
+          />
+        </Col>
+        <Col xs={6}>
+          <Select
+            options={sortOptions.map((sortOptions) => ({
+              value: sortOptions.value,
+              label: sortOptions.label,
+            }))}
+            onChange={handleSortChange}
           />
         </Col>
       </Row>
@@ -72,7 +119,7 @@ const Filters = ({ productFilters, setProductFilters }) => {
               label: category.name,
             }))}
             onChange={handleCategoryChange}
-            placeholder="Select Categories"
+            placeholder="Categories"
           />
         </Col>
         <Col xs={12} sm={6} md={4} lg={3}>
@@ -87,6 +134,28 @@ const Filters = ({ productFilters, setProductFilters }) => {
             }
             onChange={handlePriceChange}
             placeholder="Price"
+          />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={3}>
+          <Select
+            isMulti
+            options={keyboardSizes.map((keyboardSizes) => ({
+              value: keyboardSizes.value,
+              label: keyboardSizes.label,
+            }))}
+            onChange={handleKeyboardSizeChange}
+            placeholder="Board Size"
+          />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={3}>
+          <Select
+            isMulti
+            options={availableBrands.map((brand) => ({
+              value: brand.value,
+              label: brand.label,
+            }))}
+            onChange={handleBrandChange}
+            placeholder="Brand"
           />
         </Col>
       </Row>
