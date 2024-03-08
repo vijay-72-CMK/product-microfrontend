@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./ProductDetails.module.css";
 import { FaDollarSign } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
   const { productId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(null);
@@ -63,7 +64,9 @@ const ProductDetails = () => {
         setMainImage(response.data.images[0]);
       }
     } catch (error) {
-      console.log(error);
+      if (error.response.status == 404) {
+        navigate("*", { replace: true });
+      }
     } finally {
       setIsLoading(false);
     }

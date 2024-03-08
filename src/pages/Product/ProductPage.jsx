@@ -4,8 +4,10 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import axios from "axios";
 import styles from "./ProductPage.module.css";
 import Filters from "../../components/Filters/Filters";
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [productsFilter, setProductsFilter] = useState({
     categoryIds: [],
@@ -68,6 +70,9 @@ const Product = () => {
       });
       console.log(response.data);
     } catch (error) {
+      if (error.response.status == 500) {
+        navigate("/error");
+      }
       console.log(error);
     }
   };

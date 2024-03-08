@@ -30,7 +30,7 @@ const ProductCard = ({ productItem }) => {
       toast.success(`Added to cart!`);
     } catch (error) {
       console.error("Error adding to cart", error);
-      toast.error("Error adding item to cart!");
+      toast.error("Error adding item to cart, sign in");
     }
   };
   return (
