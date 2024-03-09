@@ -8,6 +8,7 @@
   justify-content: center;
   gap: 1em;
 }
+
 .priceRow > * {
   padding: 0 !important;
 }
@@ -75,6 +76,16 @@
 @media (max-width: 768px) {
   .productTitle {
     margin-top: 25px;
+  }
+  .productDetails {
+    font-size: 16px;
+    width: 100%;
+  }
+  .addCartContainer {
+    flex-direction: column;
+    gap: 0;
+    justify-content: start;
+    align-items: start;
   }
 }
 
