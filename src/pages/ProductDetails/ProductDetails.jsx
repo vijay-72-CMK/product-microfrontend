@@ -119,12 +119,14 @@ const ProductDetails = () => {
             <Container className={styles.specContainer}>
               <Row className={styles.priceRow}>
                 <Col lg={12}>
-                  <h4 className={styles.specsTitle}>Specs</h4>
+                  <h4 className={styles.specsTitle}>
+                    <bold className={styles.attributeKey}>Specs</bold>
+                  </h4>
                   <ul className={styles.attributes}>
                     {Object.keys(productData.attributes).map((key, index) => (
                       <>
                         <li key={index} className={styles.attribute}>
-                          <span className={styles.attributeKey}>{key}: </span>
+                          <span className={styles.attributeK}>{key}: </span>
                           <span className={styles.attributeValue}>
                             {productData.attributes[key]}
                           </span>
@@ -137,28 +139,37 @@ const ProductDetails = () => {
               <Row className={styles.priceRow}>
                 <div className={`${styles.productWrapper}`}>
                   <span className={styles.priceLabel}>Price:</span>
-                  <span className={styles.boldBigPrice}>
-                    {" "}
-                    $ {productData.price}
-                  </span>
+                  <span className=""> $ {productData.price}</span>
                 </div>
               </Row>
             </Container>
             <div className={styles.addCartContainer}>
               <div className={styles.quantitySelector}>
                 <label htmlFor="quantity">Quantity:</label>
-                <button onClick={handleQuantityDecrement}>-</button>
-                <input
-                  type="number"
-                  id="quantity"
-                  min="1"
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                />
-                <button onClick={handleQuantityIncrement}>+</button>
+                <div className={styles.quantityOptions}>
+                  <button
+                    onClick={handleQuantityDecrement}
+                    className={styles.quantityButton}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    id="quantity"
+                    min="1"
+                    value={quantity}
+                    onChange={handleQuantityChange}
+                  />
+                  <button
+                    onClick={handleQuantityIncrement}
+                    className={styles.quantityButton}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
               <CustomButton
-                size="xxl"
+                size="lg"
                 className={styles.addToCartButton}
                 onClick={handleAddToCart}
               >
