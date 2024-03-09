@@ -6,8 +6,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CustomButton from "../CustomButtonComponent/CustomButton";
 
 const ProductCard = ({ productItem }) => {
+  const shortProductName =
+    productItem.name.length > 22
+      ? productItem.name.slice(0, 22) + "..."
+      : productItem.name;
+
   const handleAddToCart = async (productItem) => {
     try {
       const productId = productItem.id;
@@ -45,19 +51,38 @@ const ProductCard = ({ productItem }) => {
       </Link>
 
       <Card.Body className="text-start">
-        <Card.Title className="fw-bold">{productItem.name}</Card.Title>
+        <Card.Title className="fw-bold" title={productItem.name}>
+          {shortProductName}
+        </Card.Title>
         <div className="d-flex align-items-center">
           <Rating rating={productItem.averageRating} />
           <span className="ms-auto">({productItem.averageRating})</span>
         </div>
-        <div className="d-flex align-items-center mt-3">
+        <div className="d-flex align-items-center justify-content-between mt-3">
           <span className="fw-bold">${productItem.price}</span>
-          <button
+          <CustomButton size="md" onClick={() => handleAddToCart(productItem)}>
+            <span>Add To Cart</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className={`w-6 h-6 ${styles.plusIcon}`}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+          </CustomButton>
+          {/* <button
             onClick={() => handleAddToCart(productItem)}
             className="ms-auto btn btn-primary"
           >
             Add to Cart
-          </button>
+          </button> */}
         </div>
       </Card.Body>
       <ToastContainer position="bottom-right" autoClose={2000} />

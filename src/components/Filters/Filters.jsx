@@ -3,6 +3,7 @@ import Select from "react-select";
 import { Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
+import "./Filters.css";
 
 const Filters = ({ productFilters, setProductFilters }) => {
   const [categories, setCategories] = useState([]);
@@ -91,27 +92,21 @@ const Filters = ({ productFilters, setProductFilters }) => {
   }, []);
 
   return (
-    <Container className="filter-container mb-5">
+    <>
       <Row>
-        <Col xs={6}>
+        <h2 className="catalogHeading">Custom Keys for Ultimate Clicks</h2>
+      </Row>
+      <Row>
+        <Col xs={12}>
           <SearchBar
             placeholder="Search Products..."
             filters={productFilters}
             setFilters={setProductFilters}
           />
         </Col>
-        <Col xs={6}>
-          <Select
-            options={sortOptions.map((sortOptions) => ({
-              value: sortOptions.value,
-              label: sortOptions.label,
-            }))}
-            onChange={handleSortChange}
-          />
-        </Col>
       </Row>
-      <Row>
-        <Col xs={12} sm={6} md={4} lg={3}>
+      <Row className="negMargin">
+        <Col xs={6} sm={6} md={4} lg={2}>
           <Select
             isMulti
             options={categories.map((category) => ({
@@ -122,7 +117,7 @@ const Filters = ({ productFilters, setProductFilters }) => {
             placeholder="Categories"
           />
         </Col>
-        <Col xs={12} sm={6} md={4} lg={3}>
+        <Col xs={6} sm={6} md={4} lg={2}>
           <Select
             options={priceOptions}
             value={
@@ -136,7 +131,7 @@ const Filters = ({ productFilters, setProductFilters }) => {
             placeholder="Price"
           />
         </Col>
-        <Col xs={12} sm={6} md={4} lg={3}>
+        <Col xs={6} sm={6} md={4} lg={2}>
           <Select
             isMulti
             options={keyboardSizes.map((keyboardSizes) => ({
@@ -147,7 +142,7 @@ const Filters = ({ productFilters, setProductFilters }) => {
             placeholder="Board Size"
           />
         </Col>
-        <Col xs={12} sm={6} md={4} lg={3}>
+        <Col xs={6} sm={6} md={4} lg={2}>
           <Select
             isMulti
             options={availableBrands.map((brand) => ({
@@ -158,8 +153,17 @@ const Filters = ({ productFilters, setProductFilters }) => {
             placeholder="Brand"
           />
         </Col>
+        <Col xs={6} sm={6} md={4} lg={4}>
+          <Select
+            options={sortOptions.map((sortOptions) => ({
+              value: sortOptions.value,
+              label: sortOptions.label,
+            }))}
+            onChange={handleSortChange}
+          />
+        </Col>
       </Row>
-    </Container>
+    </>
   );
 };
 

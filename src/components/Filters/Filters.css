@@ -1,0 +1,17 @@
+.catalogHeading {
+  font-size: 36px;
+  text-align: left;
+  margin-bottom: 20px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.negMargin {
+  margin-top: -1.25em;
+}
+
+@media (max-width: 768px) {
+  .negMargin {
+    row-gap: 0.5em;
+  }
+}

@@ -1,12 +1,14 @@
 .products {
   margin-top: 50px;
-  min-height: "1000px";
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .catalogHeading {
-  font-family: "Montserrat", sans-serif;
   font-size: 36px;
-  text-align: center;
+  text-align: left;
   margin-bottom: 20px;
   font-weight: 700;
 }

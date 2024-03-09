@@ -97,10 +97,6 @@ const Product = () => {
         </div>
       ) : (
         <>
-          <h2 className={styles.catalogHeading}>
-            Custom Keys for Ultimate Clicks
-          </h2>
-
           <Filters
             productFilters={productsFilter}
             setProductFilters={setProductsFilter}
