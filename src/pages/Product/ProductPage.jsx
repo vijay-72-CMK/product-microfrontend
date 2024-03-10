@@ -5,9 +5,17 @@ import axios from "axios";
 import styles from "./ProductPage.module.css";
 import Filters from "../../components/Filters/Filters";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Product = () => {
   const navigate = useNavigate();
+  let { state } = useLocation();
+  const categoryName = state ? state.categoryName : null;
+  console.log(
+    "Arrived at products page, category from state:",
+    state,
+    categoryName
+  );
   const [products, setProducts] = useState([]);
   const [productsFilter, setProductsFilter] = useState({
     categoryIds: [],
@@ -82,11 +90,22 @@ const Product = () => {
     console.log(productsFilter);
   }, [productsFilter, currentPage]);
 
+  useEffect(() => {
+    if (categoryName) {
+      setProductsFilter((prevFilter) => ({
+        ...prevFilter,
+        categoryIds: [state.categoryName],
+      }));
+    }
+  }, [categoryName]);
+
   return (
     <Container className={`${styles.products}`}>
       <Filters
         productFilters={productsFilter}
         setProductFilters={setProductsFilter}
+        categories={categoryName}
+        selectedCategory={categoryName}
       />
 
       {/* Products Display */}

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Select from "react-select";
 import { Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
 import "./Filters.css";
 
-const Filters = ({ productFilters, setProductFilters }) => {
+const Filters = ({ productFilters, setProductFilters, selectedCategory }) => {
   const [categories, setCategories] = useState([]);
 
   const priceOptions = [
@@ -88,8 +88,9 @@ const Filters = ({ productFilters, setProductFilters }) => {
     setProductFilters({ ...productFilters, selectedSort: sortOption.value });
   };
   useEffect(() => {
+    console.log("yo selected category is" + selectedCategory);
     fetchCategories();
-  }, []);
+  }, [selectedCategory]);
 
   return (
     <>
@@ -108,6 +109,7 @@ const Filters = ({ productFilters, setProductFilters }) => {
       <Row className="negMargin">
         <Col xs={6} sm={6} md={4} lg={2}>
           <Select
+            key={String(selectedCategory)}
             isMulti
             options={categories.map((category) => ({
               value: category.name,
@@ -115,6 +117,11 @@ const Filters = ({ productFilters, setProductFilters }) => {
             }))}
             onChange={handleCategoryChange}
             placeholder="Categories"
+            defaultValue={
+              selectedCategory
+                ? { value: selectedCategory, label: selectedCategory }
+                : null
+            }
           />
         </Col>
         <Col xs={6} sm={6} md={4} lg={2}>
