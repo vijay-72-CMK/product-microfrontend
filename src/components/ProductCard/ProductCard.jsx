@@ -10,8 +10,8 @@ import CustomButton from "../CustomButtonComponent/CustomButton";
 
 const ProductCard = ({ productItem }) => {
   const shortProductName =
-    productItem.name.length > 22
-      ? productItem.name.slice(0, 22) + "..."
+    productItem.name.length > 17
+      ? productItem.name.slice(0, 17) + "..."
       : productItem.name;
 
   const handleAddToCart = async (productItem) => {
