@@ -6,6 +6,7 @@ import { FaDollarSign } from "react-icons/fa";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CustomButton from "../../components/CustomButtonComponent/CustomButton";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -89,15 +90,15 @@ const ProductDetails = () => {
         <p>Loading product details...</p>
       ) : (
         <Row>
-          <Col md={6}>
+          <Col md={3}>
             <Image
               className={`${styles.productImage} img-fluid`}
               src={mainImage}
               alt="Product Main"
             />
-            <Row className="mt-3 no-gutters">
+            <Row className={`mt-3 no-gutters ${styles.imageThumbnail}`}>
               {productData.images.map((image, index) => (
-                <Col key={index} xs={2}>
+                <Col key={index} xs={4}>
                   <Image
                     className={`${styles.thumbnail} img-fluid ${
                       index === selectedThumbnail ? styles.selected : ""
@@ -110,47 +111,71 @@ const ProductDetails = () => {
               ))}
             </Row>
           </Col>
-          <Col md={6}>
+          <Col md={9} className={styles.productDetails}>
             <h2 className={styles.productTitle}>{productData.name}</h2>
-            <p className={`${styles.productDescription} text-wrap`}>
+            <p className={`${styles.productDescription}`}>
               {productData.description}
             </p>
-            <div className={`${styles.productWrapper} mb-2`}>
-              <span className={styles.priceLabel}>Price:</span>
-              <span className={styles.boldBigPrice}>
-                <FaDollarSign className="dollar-icon" />
-                {productData.price}
-              </span>
+            <Container className={styles.specContainer}>
+              <Row className={styles.priceRow}>
+                <Col lg={12}>
+                  <h4 className={styles.specsTitle}>
+                    <bold className={styles.attributeKey}>Specs</bold>
+                  </h4>
+                  <ul className={styles.attributes}>
+                    {Object.keys(productData.attributes).map((key, index) => (
+                      <>
+                        <li key={index} className={styles.attribute}>
+                          <span className={styles.attributeK}>{key}: </span>
+                          <span className={styles.attributeValue}>
+                            {productData.attributes[key]}
+                          </span>
+                        </li>
+                      </>
+                    ))}
+                  </ul>
+                </Col>
+              </Row>
+              <Row className={styles.priceRow}>
+                <div className={`${styles.productWrapper}`}>
+                  <span className={styles.priceLabel}>Price:</span>
+                  <span className=""> $ {productData.price}</span>
+                </div>
+              </Row>
+            </Container>
+            <div className={styles.addCartContainer}>
+              <div className={styles.quantitySelector}>
+                <label htmlFor="quantity">Quantity:</label>
+                <div className={styles.quantityOptions}>
+                  <button
+                    onClick={handleQuantityDecrement}
+                    className={styles.quantityButton}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    id="quantity"
+                    min="1"
+                    value={quantity}
+                    onChange={handleQuantityChange}
+                  />
+                  <button
+                    onClick={handleQuantityIncrement}
+                    className={styles.quantityButton}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <CustomButton
+                size="lg"
+                className={styles.addToCartButton}
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </CustomButton>
             </div>
-            <h4 className="fw-bold">Specs</h4>
-            <ul className={styles.attributes}>
-              {Object.keys(productData.attributes).map((key, index) => (
-                <li key={index} className={styles.attribute}>
-                  <span className={styles.attributeKey}>{key}: </span>
-                  <span className={styles.attributeValue}>
-                    {productData.attributes[key]}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className={styles.quantitySelector}>
-              <label htmlFor="quantity">Quantity:</label>
-              <button onClick={handleQuantityDecrement}>-</button>
-              <input
-                type="number"
-                id="quantity"
-                min="1"
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
-              <button onClick={handleQuantityIncrement}>+</button>
-            </div>
-            <Button
-              className={styles.addToCartButton}
-              onClick={handleAddToCart}
-            >
-              Add to Cart
-            </Button>
           </Col>
         </Row>
       )}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
+import errorImage from "../../../public/500.svg";
 
 const ErrorPage = () => {
   return (
