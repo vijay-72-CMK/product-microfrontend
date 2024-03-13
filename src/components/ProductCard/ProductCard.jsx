@@ -15,6 +15,12 @@ const ProductCard = ({ productItem }) => {
       : productItem.name;
 
   const handleAddToCart = async (productItem) => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") || false;
+    if (!isLoggedIn) {
+      toast.error("Please sign in to add to cart");
+      return;
+    }
+
     try {
       const productId = productItem.id;
       const quantity = 1;

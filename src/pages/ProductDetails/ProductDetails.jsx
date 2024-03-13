@@ -30,6 +30,12 @@ const ProductDetails = () => {
   };
 
   const handleAddToCart = async () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") || false;
+    if (!isLoggedIn) {
+      toast.error("Please sign in to add to cart");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:8082/api/cart/modify-cart",
@@ -48,8 +54,14 @@ const ProductDetails = () => {
       console.log("Event dispatched: cart-change from PDP");
       toast.success(`Added ${quantity} item(s) to the cart!`);
     } catch (error) {
-      console.error("Error adding to cart", error);
-      toast.error("Error adding item to cart!");
+      if (!error.response || error.response.status == 500) {
+        navigate("/error", { replace: true });
+      }
+      if (error.response.status == 400) {
+        toast.error(error.response.data.detail);
+      } else {
+        toast.error("Something went wrong when adding to cart");
+      }
     }
   };
 
@@ -65,8 +77,11 @@ const ProductDetails = () => {
         setMainImage(response.data.images[0]);
       }
     } catch (error) {
+      if (!error.response || error.response.status == 500) {
+        navigate("/error", { replace: true });
+      }
       if (error.response.status == 404) {
-        navigate("*", { replace: true });
+        navigate("/*", { replace: true });
       }
     } finally {
       setIsLoading(false);

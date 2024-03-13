@@ -31,9 +31,6 @@ const Filters = ({ productFilters, setProductFilters, selectedCategory }) => {
     { label: "KBDFans", value: "KBDfans" },
     { label: "Keychron", value: "Keychron" },
     { label: "Glorious", value: "Glorious" },
-    { label: "Ducky", value: "Ducky" },
-    { label: "Varmilo", value: "Varmilo" },
-    { label: "Leopold", value: "Leopold" },
   ];
 
   const sortOptions = [
@@ -53,6 +50,9 @@ const Filters = ({ productFilters, setProductFilters, selectedCategory }) => {
       setCategories(response.data);
     } catch (error) {
       console.log(error);
+      if (!error.response || error.response.status == 500) {
+        navigate("/error", { replace: true });
+      }
     }
   };
 

@@ -78,10 +78,10 @@ const Product = () => {
       });
       console.log(response.data);
     } catch (error) {
-      if (error.response.status == 500) {
-        navigate("/error");
-      }
       console.log(error);
+      if (!error.response || error.response.status == 500) {
+        navigate("/error", { replace: true });
+      }
     }
   };
 
